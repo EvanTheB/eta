@@ -3,11 +3,13 @@ from datetime import datetime, timedelta
 import time
 import scipy.stats
 import subprocess
+from  collections import deque
+
 
 
 def main():
-    v = []
-    t = []
+    v = deque(maxlen=600)
+    t = deque(maxlen=600)
     sleep_time = 2
     while True:
         l = subprocess.run(
@@ -39,7 +41,7 @@ def main():
                 )
 
         time.sleep(sleep_time)
-        sleep_time = min(10, sleep_time * 1.05)
+        sleep_time = min(60, sleep_time * 1.05)
 
 
 if __name__ == '__main__':
