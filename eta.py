@@ -8,8 +8,9 @@ from  collections import deque
 
 
 def main():
-    v = deque(maxlen=600)
-    t = deque(maxlen=600)
+    vs = set()
+    v = []
+    t = []
     sleep_time = 2
     while True:
         l = subprocess.run(
@@ -20,8 +21,13 @@ def main():
             encoding='utf8',
         ).stdout
 
-        v.append(float(l))
-        t.append(datetime.now().timestamp())
+        if float(l) < 0.5:
+            exit()
+
+        if l not in vs:
+            vs.add(l)
+            v.append(float(l))
+            t.append(datetime.now().timestamp())
         # print(t)
         # print(len(set(v)), len(set(v)) / len(v))
 
